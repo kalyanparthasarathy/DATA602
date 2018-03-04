@@ -44,7 +44,6 @@ Created on Sun Feb 18 09:42:04 2018
 
 ############## IMPORT STATEMENTS ##############
 
-import random
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -119,7 +118,7 @@ class StockPortfolio:
                 # Increase current holdings detail
                 self.securities[ticker] = self.securities[ticker] + qty
                 
-                print("\n\nYou order is executed. You have purchase {} stocks of {} @ the unit price ${}\n\n".format(qty, ticker, execPrice))
+                print("\n\nYou order is executed. You have purchased {} stocks of {} @ the unit price ${}\n\n".format(qty, ticker, execPrice))
             else:
                 print("\n\nYou do not have enough money to make the purchase. Available funds: {}\n\n".format(self.totalAllocatedAmount))
             
@@ -181,11 +180,22 @@ class StockPortfolio:
     def displayProfitAndLoss(self):
         # Using PrettyTable to display the P&L
         tableData = PrettyTable(["Ticker", "Position", "Market", "WAP", "UPL", "RPL"])
-        tableData.add_row([security1, self.securities[security1], format_currency(self.getStockPrice(security1, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security1], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security1), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security1), 2), 'USD', locale='en_US')])
-        tableData.add_row([security2, self.securities[security2], format_currency(self.getStockPrice(security2, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security2], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security2), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security2), 2), 'USD', locale='en_US')])
-        tableData.add_row([security3, self.securities[security3], format_currency(self.getStockPrice(security3, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security3], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security3), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security3), 2), 'USD', locale='en_US')])
-        tableData.add_row([security4, self.securities[security4], format_currency(self.getStockPrice(security4, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security4], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security4), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security4), 2), 'USD', locale='en_US')])
-        tableData.add_row([security5, self.securities[security5], format_currency(self.getStockPrice(security5, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security5], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security5), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security5), 2), 'USD', locale='en_US')])
+        
+        if self.securities[security1] != 0 or round(self.getUnrealizedProfit(security1), 2) != 0 or round(self.getRealizedProfit(security1), 2) != 0:
+            tableData.add_row([security1, self.securities[security1], format_currency(self.getStockPrice(security1, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security1], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security1), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security1), 2), 'USD', locale='en_US')])
+
+        if self.securities[security2] != 0 or round(self.getUnrealizedProfit(security2), 2) != 0 or round(self.getRealizedProfit(security2), 2) != 0:
+            tableData.add_row([security2, self.securities[security2], format_currency(self.getStockPrice(security2, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security2], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security2), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security2), 2), 'USD', locale='en_US')])
+
+        if self.securities[security3] != 0 or round(self.getUnrealizedProfit(security3), 2) != 0 or round(self.getRealizedProfit(security3), 2) != 0:
+            tableData.add_row([security3, self.securities[security3], format_currency(self.getStockPrice(security3, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security3], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security3), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security3), 2), 'USD', locale='en_US')])
+
+        if self.securities[security4] != 0 or round(self.getUnrealizedProfit(security4), 2) != 0 or round(self.getRealizedProfit(security4), 2) != 0:
+            tableData.add_row([security4, self.securities[security4], format_currency(self.getStockPrice(security4, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security4], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security4), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security4), 2), 'USD', locale='en_US')])
+
+        if self.securities[security5] != 0 or round(self.getUnrealizedProfit(security5), 2) != 0 or round(self.getRealizedProfit(security5), 2) != 0:
+            tableData.add_row([security5, self.securities[security5], format_currency(self.getStockPrice(security5, 'BID'), 'USD', locale='en_US'), format_currency(round(self.securitiesWAP[security5], 2), 'USD', locale='en_US'), format_currency(round(self.getUnrealizedProfit(security5), 2), 'USD', locale='en_US'), format_currency(round(self.getRealizedProfit(security5), 2), 'USD', locale='en_US')])
+
         tableData.add_row(["Cash", format_currency(round(self.totalAllocatedAmount, 2), 'USD', locale='en_US'), format_currency(round(self.totalAllocatedAmount, 2), 'USD', locale='en_US'), "", "", ""])
         print("\n\n")
         print(tableData)
